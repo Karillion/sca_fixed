@@ -1,0 +1,168 @@
+########################################################################
+# SCA — keyed override for 09_ascension_traits.txt (load-last).
+# Only traits with genuine SCA edits are here; all others come from the
+# live 4.4.x base game. Each block = current vanilla + SCA deltas; dropped
+# 4.4.x logic (add-conditions, tags, modifiers, slave_cost=trade) recovered.
+########################################################################
+
+trait_adaptive_lithoid = {
+	cost = 2
+	species_potential_add = {
+		can_do_advanced_gene_modding = yes
+	}
+	species_possible_remove = {
+		OR = {
+			can_do_advanced_gene_modding = yes
+			can_remove_beneficial_genetic_traits = yes
+			can_remove_pop_growth_genetic_traits = yes
+			can_add_or_remove_phenotype_traits = yes
+		}
+	}
+	species_possible_merge_remove = {
+		always = yes
+	}
+	icon = "gfx/interface/icons/traits/trait_adaptive.dds"
+	initial = no
+	randomized = no
+	advanced_trait = yes
+	opposites = { "trait_nonadaptive" "trait_extremely_adaptive" "trait_robust" "trait_adaptive" "trait_shelled" }
+	#allowed_archetypes = { LITHOID }
+	#tags = { organic positive habitability lithoid species genetic_ascension special }
+	modifier = {
+		pop_environment_tolerance = 0.10
+	}
+	slave_cost = {
+		trade = 1000
+	}
+}
+
+trait_delicious = {
+	cost = {
+		base = 2
+		modifier = {
+			add = -1
+			advanced_traits_have_reduced_cost = yes
+		}
+	}
+	opposites = { "trait_infernal" }
+	species_potential_add = {
+		can_do_advanced_gene_modding = yes
+	}
+	species_possible_remove = {
+		OR = {
+			can_do_advanced_gene_modding = yes
+			can_remove_beneficial_genetic_traits = yes
+		}
+	}
+	species_possible_merge_remove = {
+		always = yes
+	}
+	initial = no
+	randomized = no
+	advanced_trait = yes
+	allowed_archetypes = { BIOLOGICAL LITHOID }
+	tags = { organic positive food livestock genetic_ascension }
+	modifier = {
+		pop_livestock_bonus_workforce_mult = 1
+	}
+	slave_cost = {
+		trade = 1000
+	}
+}
+
+trait_ductile = {
+	cost = {
+		base = 2
+		modifier = {
+			add = -1
+			advanced_traits_have_reduced_cost = yes
+		}
+	}
+	species_potential_add = {
+		can_do_advanced_gene_modding = yes
+	}
+	species_possible_remove = {
+		OR = {
+			can_do_advanced_gene_modding = yes
+			can_remove_beneficial_genetic_traits = yes
+		}
+	}
+	species_possible_merge_remove = {
+		always = yes
+	}
+	initial = no
+	randomized = no
+	advanced_trait = yes
+	allowed_archetypes = { BIOLOGICAL LITHOID }
+	tags = { organic positive alloys livestock genetic_ascension }
+	#species_class = { INF }
+	modifier = {
+		pop_livestock_infernal_bonus_workforce_mult = 1
+	}
+	slave_cost = {
+		trade = 1500
+	}
+}
+
+trait_felsic = {
+	cost = {
+		base = 2
+		modifier = {
+			add = -1
+			advanced_traits_have_reduced_cost = yes
+		}
+	}
+	species_potential_add = {
+		can_do_advanced_gene_modding = yes
+	}
+	species_possible_remove = {
+		OR = {
+			can_do_advanced_gene_modding = yes
+			can_remove_beneficial_genetic_traits = yes
+		}
+	}
+	initial = no
+	randomized = no
+	advanced_trait = yes
+	allowed_archetypes = { BIOLOGICAL LITHOID }
+	tags = { organic positive livestock mineral genetic_ascension }
+
+	modifier = {
+		pop_livestock_lithoid_bonus_workforce_mult = 1
+	}
+	slave_cost = {
+		trade = 1000
+	}
+}
+
+trait_rapid_breeders_lithoid = {
+	cost = 2
+	species_potential_add = {
+		can_do_advanced_gene_modding = yes
+	}
+	species_possible_remove = {
+		OR = {
+			can_do_advanced_gene_modding = yes
+			can_remove_beneficial_genetic_traits = yes
+			can_remove_pop_growth_genetic_traits = yes
+			can_add_or_remove_phenotype_traits = yes
+		}
+	}
+	species_possible_merge_remove = {
+		always = yes
+	}
+	icon = "gfx/interface/icons/traits/trait_rapid_breeders.dds"
+	initial = no
+	randomized = no
+	advanced_trait = yes
+	opposites = { "trait_slow_breeders" "trait_rapid_breeders" "trait_fertile" "trait_plantoid_budding" "trait_lithoid_budding" "trait_tiyanki" "trait_egg_laying" }
+	#allowed_archetypes = { LITHOID }
+	#tags = { organic positive pop_growth lithoid species genetic_ascension special }
+	modifier = {
+		logistic_growth_mult = 0.1
+	}
+	slave_cost = {
+		trade = 2000
+	}
+}
+

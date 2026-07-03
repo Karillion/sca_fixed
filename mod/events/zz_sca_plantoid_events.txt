@@ -1,0 +1,166 @@
+namespace = plant
+
+########################################################################
+# SCA — plantoid event override (keyed, load-last).
+#
+# Replaces the old full-file copy of plantoid_events.txt, which was frozen at
+# 4.3.7 and used the pre-4.4 planet_event/planet_flag syntax where 4.4.x renamed
+# these to carrier_event/carrier_flag (that reversion could break the idyllic-
+# bloom / terraform events). All plantoid events now come from the live 4.4.x
+# base game EXCEPT plant.115, whose only SCA change is redefined here on top of
+# the current vanilla block: the species-class check `is_flora_species = yes`
+# is replaced with a trait-based condition so bloom works after class abolition.
+########################################################################
+
+carrier_event = {
+	id = plant.115
+	hide_window = yes
+	is_triggered_only = yes
+
+	trigger = {
+		OR = {
+			has_active_building = building_gaiaseeders_4
+			has_active_building = building_gaiaseeders_pc_gaia
+		}
+		has_carrier_flag = gaia_seeder_bloom
+	}
+
+	immediate = {
+		owner = {
+			set_country_flag = has_bloomed_pops
+		}
+		set_saved_date = {
+			key = gaia_seeder_bloom_timer
+			days_from_present = 1800
+			expires = 1800
+		}
+		set_variable_to_random_value = {
+			which = loop_counter
+			min = 3
+			max = 5
+			rounded = yes
+		}
+		while = {
+			count = loop_counter
+			weighted_random_owned_pop_group = {
+				limit = {
+					OR = {
+						species = {
+							#SCA: was `is_flora_species = yes` (species-class check). Broadened to trait-based
+							#     founder/gaia conditions so bloom still works once species classes are abolished.
+							is_robotic_species = no
+							OR = { # New condition - founder or gaia pref
+								has_trait = trait_auto_mod_biological
+								has_trait = trait_wilderness
+								has_trait = trait_auto_hab_preference
+								has_trait = trait_pc_gaia_preference
+								has_trait = trait_pc_gaia_preference_terraforming
+								is_species = root.owner.owner_species
+								is_subspecies = root.owner.owner_species
+							}
+						}
+						AND = {
+							species = {
+								is_robotic_species = no
+							}
+							root.owner = {
+								has_tradition = tr_mutation_unnatural_selection
+							}
+						}
+					}
+					is_being_assimilated = no
+					is_being_purged = no
+					NOR = {
+						has_trait = trait_plantoid_bloomed
+						has_trait = trait_malleable_genes
+					}
+				}
+				species = {
+					save_event_target_as = old_species
+				}
+				save_event_target_as = old_pop_group
+
+				if = {
+					limit = {
+						NOT = {
+							any_galaxy_species = {
+								has_species_flag = bloomed_species_of_@event_target:old_species
+							}
+						}
+					}
+					create_species = {
+						is_mod = yes
+						name = this
+						plural = this
+						class = this
+						portrait = this
+						traits = this
+						can_be_modified = this
+						homeworld = this
+						namelist = this
+						gender = this
+						traits = {
+							trait = trait_plantoid_bloomed
+						}
+						effect = {
+							if = {
+								limit = {
+									NOR = {
+										has_trait = trait_auto_hab_preference
+										has_trait = trait_pc_gaia_preference
+										has_trait = trait_pc_gaia_preference_terraforming
+									}
+								}
+								set_habitability_trait = { trait = trait_pc_gaia_preference }
+							}
+							save_event_target_as = target_species
+							set_species_flag = bloomed_species_of_@event_target:old_species
+						}
+					}
+				}
+				else = {
+					random_galaxy_species = {
+						limit = {
+							has_species_flag = bloomed_species_of_@event_target:old_species
+						}
+						save_event_target_as = target_species
+					}
+				}
+				planet = {
+					create_pop_group = {
+						pop_group = event_target:old_pop_group
+						species = event_target:target_species
+						size = 0
+						effect = {
+							transfer_pop_amount = {
+								source = event_target:old_pop_group
+								target = this
+								amount = 100
+							}
+						}
+					}
+				}
+			}
+		}
+		create_message = {
+			type = MESSAGE_POPS_IDYLLIC_BLOOMED
+			localization = MESSAGE_POPS_IDYLLIC_BLOOMED
+			days = 30
+			target = this
+			variable = {
+				type = name
+				localization = PLANET
+				scope = this
+			}
+			variable = {
+				type = variable
+				localization = VALUE
+				scope = this
+			}
+		}
+		carrier_event = {
+			id = plant.115
+			days = 1800
+		}
+	}
+}

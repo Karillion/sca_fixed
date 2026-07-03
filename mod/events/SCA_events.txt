@@ -1,0 +1,77 @@
+namespace = species_class_abolition
+
+# Replace NPC traits with player versions
+
+#trait_plantoid_phototrophic
+#trait_plantoid_radiotrophic
+#trait_plantoid_budding
+#trait_hollow_bones
+#trait_rooted
+#trait_shelled
+#trait_brittle
+#trait_flight
+#trait_spatial_mastery
+#trait_cranial_hypertrophy
+#trait_cranial_megatrophy
+
+event = {
+	id = species_class_abolition.1
+	hide_window = yes
+	is_triggered_only = yes
+	
+	immediate = {
+		# Clean trait replacements
+		every_galaxy_species = {
+			limit = {
+				OR = {
+					has_trait = trait_organic
+					has_trait = trait_lithoid
+					has_trait = trait_infernal
+				}
+			}
+		
+			# Not organic
+			if = {
+				limit = {
+					OR = {
+						has_trait = trait_sca_ergivore
+						is_infernal = yes
+						SCA_is_lithoid = yes
+					}
+				}
+				change_species_characteristics = {
+					remove_trait = trait_organic
+				}
+			}
+			# Not infernal
+			if = {
+				limit = {
+					is_infernal = no
+				}
+				change_species_characteristics = {
+					remove_trait = trait_infernal
+				}
+			}
+			# Not lithoid
+			if = {
+				limit = {
+					is_lithoid = no
+				}
+				change_species_characteristics = {
+					remove_trait = trait_lithoid
+				}
+			}
+			
+			# Tankbound
+			if = {
+				limit = {
+					has_trait = trait_tankbound_npc
+				}
+				change_species_characteristics = {
+					remove_trait = trait_tankbound_npc
+					add_trait = trait_tankbound
+				}
+			}
+		}
+	}
+}

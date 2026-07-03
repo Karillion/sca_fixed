@@ -1,0 +1,92 @@
+is_tankbound_empire = {
+	OR = {
+		has_valid_civic = civic_tankbound
+		has_valid_civic = civic_tankbound_corporate
+		has_valid_civic = civic_tankbound_npc
+		has_valid_civic = civic_tankbound_corporate_npc
+	}
+}
+
+#Cares about the trait
+
+SCA_is_lithoid = {
+	has_trait = trait_lithoid
+	OR = {
+		# Default lithoid
+		NOR = {
+			is_archetype = BIOLOGICAL
+			OR = {
+				has_trait = trait_organic
+				has_trait = trait_infernal
+				has_trait = trait_sca_ergivore
+			}
+		}
+		# Custom lithoid
+		is_archetype = BIOLOGICAL
+	}
+}
+
+is_lithoid = {
+	species = {
+		SCA_is_lithoid = yes
+	}
+}
+
+is_infernal = {
+	has_trait = trait_infernal
+	OR = {
+		# Default thermophile
+		NOR = {
+			is_infernal_portrait = yes
+			OR = {
+				has_trait = trait_organic
+				has_trait = trait_lithoid
+				has_trait = trait_sca_ergivore
+			}
+		}
+		# Custom thermophile
+		is_infernal_portrait = no
+	}
+}
+
+is_infernal_portrait = {
+	OR = {
+		species_class = INF
+		species_class = PRE_INF
+	}
+}
+
+is_infernal_empire = {
+	owner_species = { is_infernal = yes }
+}
+
+SCA_is_ergivore_empire = {
+	owner_species = { has_trait = trait_sca_ergivore }
+}
+
+# More inclusive trigger for adding the stuff that's still portrait-locked
+SCA_can_add_special_genetic_traits = {
+	hidden_trigger = { exists = from }
+	from = {
+		OR = {
+			# Can make xenomorph armies
+			has_technology = "tech_morphogenetic_field_mastery"
+			# Utopia - can change portrait
+			has_tradition = tr_engineered_genesis
+			
+			has_ascension_perk = ap_xeno_compatibility
+			
+			can_do_advanced_gene_modding = yes
+		}
+	}
+}
+
+SCA_has_multiple_trophic_traits = {
+	calc_true_if = {
+		amount > 2 # Allow basic trait and one override
+		has_trait = trait_organic
+		has_trait = trait_lithoid
+		has_trait = trait_infernal
+		has_trait = trait_sca_ergivore
+	}
+}

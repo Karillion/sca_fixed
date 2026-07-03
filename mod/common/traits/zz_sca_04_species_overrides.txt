@@ -1,0 +1,807 @@
+########################################################################
+# SCA — keyed override for 04_species_traits.txt (load-last).
+# Only traits with genuine SCA edits are here; all others come from the
+# live 4.4.x base game. Each block = current vanilla + SCA deltas; dropped
+# 4.4.x logic (add-conditions, tags, modifiers, slave_cost=trade) recovered.
+########################################################################
+
+trait_adaptive = {
+	cost = 2
+	category = normal
+	species_possible_add = {
+		can_add_genetic_traits = yes
+	}
+	species_possible_remove = {
+		can_remove_beneficial_genetic_traits = yes
+	}
+	species_possible_merge_remove = {
+		always = yes
+	}
+	opposites = { "trait_nonadaptive" "trait_extremely_adaptive" "trait_robust" "trait_adaptive_lithoid" "trait_shelled" "trait_permeable_skin" }
+	allowed_archetypes = { BIOLOGICAL LITHOID }
+	# SCA - Organic start only
+	species_class = { SCA_ORGANIC }
+	species_class_override = {
+		hidden_trigger = {
+			OR = {
+				SCA_is_lithoid = no
+				can_do_advanced_gene_modding = yes
+			}
+		}
+	}
+	tags = { organic positive habitability }
+	modifier = {
+		pop_environment_tolerance = 0.10
+	}
+	slave_cost = {
+		trade = 500
+	}
+}
+
+trait_extremely_adaptive = {
+	cost = 4
+	category = normal
+	species_possible_add = {
+		can_add_genetic_traits = yes
+	}
+	species_possible_remove = {
+		can_remove_beneficial_genetic_traits = yes
+	}
+	species_possible_merge_remove = {
+		always = yes
+	}
+	opposites = { "trait_nonadaptive" "trait_adaptive" "trait_robust" "trait_adaptive_lithoid" "trait_shelled" }
+	allowed_archetypes = { BIOLOGICAL LITHOID }
+	# SCA - Organic start only
+	species_class = { SCA_ORGANIC }
+	species_class_override = {
+		hidden_trigger = {
+			OR = {
+				SCA_is_lithoid = no
+				can_do_advanced_gene_modding = yes
+			}
+		}
+	}
+	tags = { organic positive habitability }
+	modifier = {
+		pop_environment_tolerance = 0.20
+	}
+	slave_cost = {
+		trade = 1000
+	}
+}
+
+trait_fleeting = {
+	cost = -1
+	category = normal
+	species_potential_add = {
+		can_add_negative_organic_traits = yes
+	}
+	modifier = { leader_lifespan_add = -10 }
+	opposites = { "trait_venerable" "trait_enduring" "trait_fleeting_lithoid" "trait_syncretic_proles" }
+	allowed_archetypes = { BIOLOGICAL LITHOID }
+	# SCA - Organic start only
+	species_class = { SCA_ORGANIC }
+	species_class_override = {
+		hidden_trigger = {
+			SCA_is_lithoid = no
+		}
+	}
+	tags = { organic negative leader }
+	ai_weight = {
+		weight = 0
+	}
+	slave_cost = {
+		trade = -200
+	}
+}
+
+trait_fleeting_lithoid = {
+	cost = -1
+	category = normal
+	species_potential_add = {
+		can_add_negative_organic_traits = yes
+	}
+	modifier = { leader_lifespan_add = -25 }
+	icon = "gfx/interface/icons/traits/trait_fleeting.dds"
+
+	opposites = { "trait_venerable" "trait_enduring" "trait_fleeting" "trait_syncretic_proles" }
+	allowed_archetypes = { BIOLOGICAL LITHOID }
+	# SCA - Lithoid start only
+	species_class = { SCA_LITHOID }
+	species_class_override = {
+		hidden_trigger = {
+			SCA_is_lithoid = yes
+		}
+	}
+	tags = { organic negative leader lithoid special }
+	ai_weight = {
+		weight = 0
+	}
+	slave_cost = {
+		trade = -200
+	}
+}
+
+trait_invasive = {
+	icon = "gfx/interface/icons/traits/trait_plantoid_invasive_species.dds"
+	cost = 2
+	opposites = { "trait_agrarian" "trait_ingenious" "trait_industrious" "trait_intelligent" "trait_thrifty" "trait_natural_engineers" "trait_natural_physicists" "trait_natural_sociologists" "trait_extremely_adaptive" "trait_adaptive" "trait_rapid_breeders" "trait_talented" "trait_quick_learners" "trait_traditional" "trait_docile" "trait_very_strong" "trait_strong" "trait_nomadic" "trait_communal" "trait_charismatic" "trait_conformists" "trait_venerable" "trait_enduring"
+	"trait_resilient" "trait_conservational" "trait_noxious" "trait_inorganic_breath" "trait_humanoid_existential_iteroparity" "trait_incubator" "trait_delicious" "trait_nerve_stapled" "trait_fertile" "trait_robust" "trait_erudite" "trait_vat_grown" "trait_felsic" "trait_natural_machinist" "trait_drake_scaled" "trait_voidling" "trait_tiyanki" "trait_exotic_metabolism" "trait_egg_laying" "trait_chromalogs" "trait_camouflage" "trait_shelled" "trait_uncanny_intuition"
+	"trait_cranial_hypertrophy" "trait_cranial_megatrophy" "trait_shell_slag" "trait_unbreakable_resolve" "trait_recursive_learners" "trait_photoadaptive" "trait_reavers" }
+	host_has_dlc = "Plantoids Species Pack"
+	sorting_priority = 30
+
+	initial = yes
+	randomized = no
+	species_potential_add = {
+		can_add_or_remove_phenotype_traits = yes
+	}
+	species_possible_remove = {
+		OR = {
+			can_do_advanced_gene_modding = yes
+			can_add_or_remove_phenotype_traits = yes
+			can_remove_pop_growth_genetic_traits = yes
+		}
+	}
+	species_possible_merge_add = {
+		always = no
+	}
+	allowed_archetypes = { BIOLOGICAL LITHOID }
+	#species_class = { PLANT FUN }
+	localized_tags = {
+		SPECIES_TRAIT_FUNGOID
+		SPECIES_TRAIT_PLANTOID
+	}
+	species_class_override = {
+		hidden_trigger = {
+			OR = {
+				can_add_or_remove_phenotype_traits = yes
+				can_add_transgenic_traits = yes
+			}
+		}
+	}
+	tags = { organic positive plantoid fungoid pop_growth habitability species }
+
+	custom_tooltip_with_modifiers = TRAIT_INVASIVE_EFFECT
+	triggered_planet_growth_habitability_modifier = {
+		logistic_growth_mult = 0.05
+		mult = value:count_negative_traits
+	}
+	triggered_planet_growth_habitability_modifier = {
+		potential = {
+			exists = from
+		}
+		pop_environment_tolerance = 0.05
+		mult = value:count_negative_traits
+	}
+}
+
+trait_lithoid_budding = {
+	host_has_dlc = "Plantoids Species Pack"
+	cost = 2
+	species_possible_add = {
+		OR = {
+			can_add_genetic_traits = yes
+			can_add_or_remove_phenotype_traits = yes
+		}
+	}
+	species_possible_remove = {
+		OR = {
+			can_remove_beneficial_genetic_traits = yes
+			can_add_or_remove_phenotype_traits = yes
+			can_remove_pop_growth_genetic_traits = yes
+		}
+	}
+	species_possible_merge_remove = {
+		always = yes
+	}
+	opposites = { "trait_pyroclastic" "trait_slow_breeders" "trait_rapid_breeders" "trait_rapid_breeders_lithoid" "trait_necrophage" "trait_clone_soldier_infertile" "trait_clone_soldier_infertile_full_potential" "trait_incubator" "trait_plantoid_budding" "trait_tiyanki" "trait_egg_laying" }
+	allowed_archetypes = { BIOLOGICAL LITHOID }
+	species_class = { SCA_LITHOID }
+	localized_tags = {
+		SPECIES_TRAIT_LITHOID
+	}
+	species_class_override = {
+		hidden_trigger = {
+			OR = {
+				can_add_or_remove_phenotype_traits = yes
+				can_add_transgenic_traits = yes
+				SCA_is_lithoid = yes
+				has_trait = trait_sca_calamitous_birth
+			}
+		}
+	}
+	tags = { organic positive lithoid pop_growth species }
+	custom_tooltip = TRAIT_LITHOID_BUDDING_EFFECT
+
+	triggered_planet_pop_group_modifier_for_species = {
+		potential = {
+			has_budding_trait = yes
+			exists = planet
+			NOT = { planet = { has_deposit = d_lithoid_crater } }
+		}
+		divide_over_pop_groups = no
+		bonus_pop_growth = @plantoid_budding_rate
+	}
+	triggered_planet_pop_group_modifier_for_species = {
+		potential = {
+			has_budding_trait = yes
+			exists = planet
+			planet = { has_deposit = d_lithoid_crater }
+		}
+		bonus_pop_growth = @lithoid_crater_budding_rate
+	}
+
+
+	slave_cost = {
+		trade = 2000
+	}
+}
+
+trait_lithoid_gaseous_byproducts = {
+	cost = 2
+	species_possible_add = {
+		OR = {
+			can_add_genetic_traits = yes
+			can_add_or_remove_phenotype_traits = yes
+		}
+	}
+	species_possible_remove = {
+		OR = {
+			can_remove_beneficial_genetic_traits = yes
+			can_add_or_remove_phenotype_traits = yes
+		}
+	}
+	species_possible_merge_remove = {
+		always = yes
+	}
+
+	opposites = { "trait_lithoid_volatile_excretions" "trait_lithoid_scintillating" "trait_drake_scaled" }
+	allowed_archetypes = { BIOLOGICAL LITHOID }
+	#species_class = { LITHOID }
+	localized_tags = {
+		SPECIES_TRAIT_LITHOID
+	}
+	species_class_override = {
+		hidden_trigger = {
+			OR = {
+				can_add_or_remove_phenotype_traits = yes
+				can_add_transgenic_traits = yes
+			}
+		}
+	}
+	tags = { organic positive rare_resource production lithoid species }
+	custom_tooltip = TRAIT_LITHOID_GASEOUS_BYPRODUCTS_EFFECT
+
+	resources = {
+		category = planet_pops
+		produces = {
+			trigger = {
+				is_slave_or_better = yes
+			}
+			exotic_gases = @lithoid_trait_resource_production
+			mult = value:lithoid_trait_mult
+		}
+	}
+
+	slave_cost = {
+		trade = 1000
+	}
+}
+
+trait_lithoid_scintillating = {
+	cost = 2
+	species_possible_add = {
+		OR = {
+			can_add_genetic_traits = yes
+			can_add_or_remove_phenotype_traits = yes
+		}
+	}
+	species_possible_remove = {
+		OR = {
+			can_remove_beneficial_genetic_traits = yes
+			can_add_or_remove_phenotype_traits = yes
+		}
+	}
+	species_possible_merge_remove = {
+		always = yes
+	}
+
+	opposites = { "trait_lithoid_volatile_excretions" "trait_lithoid_gaseous_byproducts" "trait_drake_scaled" }
+	allowed_archetypes = { BIOLOGICAL LITHOID }
+	#species_class = { LITHOID }
+	localized_tags = {
+		SPECIES_TRAIT_LITHOID
+	}
+	species_class_override = {
+		hidden_trigger = {
+			OR = {
+				can_add_or_remove_phenotype_traits = yes
+				can_add_transgenic_traits = yes
+			}
+		}
+	}
+	tags = { organic positive rare_resource production lithoid species }
+	custom_tooltip = TRAIT_LITHOID_SCINTILLATING_EFFECT
+
+	resources = {
+		category = planet_pops
+		produces = {
+			trigger = {
+				is_slave_or_better = yes
+			}
+			rare_crystals = @lithoid_trait_resource_production
+			mult = value:lithoid_trait_mult
+		}
+	}
+
+	slave_cost = {
+		trade = 1000
+	}
+}
+
+trait_lithoid_volatile_excretions = {
+	cost = 2
+	species_possible_add = {
+		OR = {
+			can_add_genetic_traits = yes
+			can_add_or_remove_phenotype_traits = yes
+		}
+	}
+	species_possible_remove = {
+		OR = {
+			can_remove_beneficial_genetic_traits = yes
+			can_add_or_remove_phenotype_traits = yes
+		}
+	}
+	species_possible_merge_remove = {
+		always = yes
+	}
+
+	opposites = { "trait_lithoid_gaseous_byproducts" "trait_lithoid_scintillating" "trait_drake_scaled" }
+	allowed_archetypes = { BIOLOGICAL LITHOID }
+	#species_class = { LITHOID }
+	localized_tags = {
+		SPECIES_TRAIT_LITHOID
+	}
+	species_class_override = {
+		hidden_trigger = {
+			OR = {
+				can_add_or_remove_phenotype_traits = yes
+				can_add_transgenic_traits = yes
+			}
+		}
+	}
+	tags = { organic positive rare_resource production lithoid species }
+	custom_tooltip = TRAIT_LITHOID_VOLATILE_EXCRETIONS_EFFECT
+
+	resources = {
+		category = planet_pops
+		produces = {
+			trigger = {
+				is_slave_or_better = yes
+			}
+			volatile_motes = @lithoid_trait_resource_production
+			mult = value:lithoid_trait_mult
+		}
+	}
+
+	slave_cost = {
+		trade = 1000
+	}
+}
+
+trait_nonadaptive = {
+	cost = -2
+	category = normal
+	species_potential_add = {
+		can_add_negative_organic_traits = yes
+	}
+	opposites = { "trait_adaptive" "trait_extremely_adaptive" "trait_robust" "trait_adaptive_lithoid" "trait_shelled" "trait_permeable_skin" "trait_genetic_memory" }
+	allowed_archetypes = { BIOLOGICAL LITHOID }
+	# SCA - Organic start only
+	species_class = { SCA_ORGANIC }
+	species_class_override = {
+		hidden_trigger = {
+			OR = {
+				SCA_is_lithoid = no
+				can_do_advanced_gene_modding = yes
+			}
+		}
+	}
+	tags = { organic negative habitability }
+	modifier = {
+		pop_environment_tolerance = -0.10
+	}
+	slave_cost = {
+		trade = -200
+	}
+	ai_weight = {
+		weight = 0
+	}
+}
+
+trait_plantoid_bloomed = {
+	host_has_dlc = "Plantoids Species Pack"
+	allowed_archetypes = { BIOLOGICAL LITHOID }
+	#species_class = { PLANT FUN }
+	localized_tags = {
+		SPECIES_TRAIT_FUNGOID
+		SPECIES_TRAIT_PLANTOID
+	}
+	tags = { organic positive plantoid fungoid pop_output amenities housing special species }
+	initial = no
+	randomized = no
+	species_potential_add = {
+		always = no
+	}
+	species_possible_merge_add = {
+		always = no
+	}
+	species_possible_remove = {
+		can_remove_beneficial_genetic_traits = yes
+	}
+	species_possible_merge_remove = {
+		always = yes
+	}
+	sorting_priority = 30
+	custom_tooltip_with_modifiers = plantoid_bloomed_trait_tooltip
+	triggered_pop_group_modifier = {
+		potential = {
+			exists = planet
+			planet = {
+				is_planet_class = pc_gaia
+				NOR = {
+					has_active_building = building_gaiaseeders_4
+					has_active_building = building_gaiaseeders_pc_gaia
+				}
+			}
+		}
+		pop_bonus_workforce_mult = 0.10
+		pop_amenities_usage_mult = -0.10
+		pop_housing_usage_mult = -0.10
+	}
+
+	triggered_pop_group_modifier = {
+		potential = {
+			exists = planet
+			planet = {
+				is_planet_class = pc_gaia
+				OR = {
+					has_active_building = building_gaiaseeders_4
+					has_active_building = building_gaiaseeders_pc_gaia
+				}
+			}
+		}
+		pop_bonus_workforce_mult = 0.15
+		pop_amenities_usage_mult = -0.15
+		pop_housing_usage_mult = -0.15
+	}
+
+	triggered_planet_growth_habitability_modifier = {
+		potential = {
+			exists = planet
+			planet = {
+				is_planet_class = pc_gaia
+				NOR = {
+					has_active_building = building_gaiaseeders_4
+					has_active_building = building_gaiaseeders_pc_gaia
+				}
+			}
+		}
+		logistic_growth_mult = 0.1
+	}
+
+	triggered_planet_growth_habitability_modifier = {
+		potential = {
+			exists = planet
+			planet = {
+				is_planet_class = pc_gaia
+				OR = {
+					has_active_building = building_gaiaseeders_4
+					has_active_building = building_gaiaseeders_pc_gaia
+				}
+			}
+		}
+		logistic_growth_mult = 0.15
+	}
+
+	slave_cost = {
+		trade = 2000
+	}
+}
+
+trait_plantoid_budding = {
+	host_has_dlc = "Plantoids Species Pack"
+	cost = 2
+	random_weight = {
+		FUN = 2
+		PLANT = 2
+		AQUATIC = 2
+	}
+	species_potential_add = {
+		# Random/genemodded version
+		NOT = { has_trait = trait_plantoid_budding }
+		NOT = { has_trait = trait_lithoid }
+		SCA_can_add_special_genetic_traits = yes
+	}
+	species_possible_remove = {
+		OR = {
+			can_remove_beneficial_genetic_traits = yes
+			can_add_or_remove_phenotype_traits = yes
+			can_remove_pop_growth_genetic_traits = yes
+		}
+	}
+	species_possible_merge_remove = {
+		always = yes
+	}
+	opposites = { "trait_pyroclastic" "trait_slow_breeders" "trait_rapid_breeders" "trait_rapid_breeders_lithoid" "trait_necrophage" "trait_clone_soldier_infertile" "trait_clone_soldier_infertile_full_potential" "trait_lithoid_budding" "trait_tiyanki" "trait_egg_laying" }
+	allowed_archetypes = { BIOLOGICAL LITHOID }
+	species_class = { PLANT FUN }
+	localized_tags = {
+		SPECIES_TRAIT_FUNGOID
+		SPECIES_TRAIT_PLANTOID
+	}
+	species_class_override = {
+		hidden_trigger = {
+			OR = {
+				SCA_can_add_special_genetic_traits = yes
+				can_add_or_remove_phenotype_traits = yes
+				can_add_transgenic_traits = yes
+			}
+		}
+	}
+	#SCA - more budding
+	portrait_override = { aqu7 nec3 stargazer_01 art9 art12 mol6 mol12 mol16 mol17 bio6 bio8 aqu1 tox3 tox4 tox7 psionic_05 psionic_12 }
+	tags = { organic positive plantoid fungoid pop_growth species }
+	custom_tooltip = TRAIT_PLANTOID_BUDDING_EFFECT
+
+	triggered_planet_pop_group_modifier_for_species = {
+		potential = {
+			has_budding_trait = yes
+		}
+		divide_over_pop_groups = no
+		bonus_pop_growth = @plantoid_budding_rate
+	}
+
+	slave_cost = {
+		trade = 2000
+	}
+}
+
+trait_plantoid_phototrophic = {
+	host_has_dlc = "Plantoids Species Pack"
+	cost = 1
+
+	random_weight = {
+		PLANT = 3
+	}
+	species_potential_add = {
+		# Random/genemodded version
+		NOT = { has_trait = trait_plantoid_phototrophic }
+		SCA_can_add_special_genetic_traits = yes
+	}
+	species_possible_remove = {
+		OR = {
+			can_remove_beneficial_genetic_traits = yes
+			can_add_or_remove_phenotype_traits = yes
+		}
+	}
+	species_possible_merge_remove = {
+		always = yes
+	}
+	opposites = { "trait_plantoid_radiotrophic" "trait_voidling" "trait_cave_dweller" }
+	#SCA - Let's be more precise about things.
+	portrait_override = { fun1 fun4 fun7 fun17 avi3 mol18 stargazer_01 lith6 bio6 nec3 }
+	species_class = { PLANT }
+	localized_tags = {
+		SPECIES_TRAIT_FUNGOID
+		SPECIES_TRAIT_PLANTOID
+	}
+	species_class_override = {
+		hidden_trigger = {
+			OR = {
+				SCA_can_add_special_genetic_traits = yes
+				can_add_or_remove_phenotype_traits = yes
+				can_add_transgenic_traits = yes
+			}
+		}
+	}
+	tags = { organic positive plantoid fungoid upkeep species }
+	sorting_priority = 30
+	custom_tooltip = TRAIT_PLANTOID_PHOTOTROPHIC_EFFECT
+
+	resources = {
+		category = planet_pops
+		# Energy Upkeep
+		# Suppressed when the Pop also has Radiotrophic, which supersedes Phototrophic; otherwise the Pop would pay both traits' Energy upkeep.
+		upkeep = {
+			trigger = {
+				is_being_purged = no
+				is_sapient = yes
+				NOT = { has_trait = trait_plantoid_radiotrophic }
+			}
+			energy = @living_standard_phototrophic_normal
+		}
+	}
+
+	slave_cost = {
+		trade = 1000
+	}
+}
+
+trait_plantoid_radiotrophic = {
+	host_has_dlc = "Plantoids Species Pack"
+	cost = 2
+
+	random_weight = {
+		FUN = 2
+		TOX = 2
+		PLANT = 1.5
+	}
+	species_potential_add = {
+		# Random/genemodded version
+		NOT = { has_trait = trait_plantoid_radiotrophic }
+		OR = {
+			has_harvested_radiotrophic_dna = yes
+			SCA_can_add_special_genetic_traits = yes
+		}
+	}
+	species_possible_remove = {
+		OR = {
+			can_remove_beneficial_genetic_traits = yes
+			can_add_or_remove_phenotype_traits = yes
+		}
+	}
+	species_possible_merge_remove = {
+		always = yes
+	}
+	opposites = { "trait_plantoid_phototrophic" "trait_voidling" }
+	allowed_archetypes = { BIOLOGICAL LITHOID }
+	#SCA - Toxoids love radiation
+	species_class = { PLANT FUN LITHOID TOX INF }
+	localized_tags = {
+		SPECIES_TRAIT_FUNGOID
+		SPECIES_TRAIT_PLANTOID
+		SPECIES_TRAIT_LITHOID
+		SPECIES_TRAIT_TOXOID
+		SPECIES_TRAIT_INFERNAL
+	}
+	species_class_override = {
+		hidden_trigger = {
+			OR = {
+				SCA_can_add_special_genetic_traits = yes
+				can_add_or_remove_phenotype_traits = yes
+				can_add_transgenic_traits = yes
+				has_harvested_radiotrophic_dna = yes
+			}
+		}
+	}
+	tags = { organic positive plantoid fungoid lithoid infernal upkeep species }
+	custom_tooltip = TRAIT_PLANTOID_RADIOTROPHIC_EFFECT
+	resources = {
+		category = planet_pops
+		# Energy Upkeep
+		upkeep = {
+			trigger = {
+				is_being_purged = no
+				exists = planet
+				NOT = {
+					planet = { is_planet_class = pc_nuked }
+				}
+				is_sapient = yes
+			}
+			energy = @living_standard_phototrophic_normal
+		}
+	}
+	modifier = {
+		pc_nuked_habitability = 0.1
+	}
+	triggered_planet_growth_habitability_modifier = {
+		potential = {
+			exists = planet
+			planet = { has_deposit = d_lithoid_crater }
+		}
+		pc_nuked_habitability = 0.05
+	}
+	triggered_planet_growth_habitability_modifier = {
+		potential = {
+			exists = planet
+			planet = { is_planet_class = pc_nuked }
+		}
+		logistic_growth_mult = 0.1
+		mult = value:lithoid_trait_mult
+	}
+	triggered_pop_group_modifier = {
+		potential = {
+			exists = planet
+			planet = { has_modifier = wasteland_radiation }
+		}
+		pop_happiness = 0.1
+		mult = value:lithoid_trait_mult
+	}
+	slave_cost = {
+		trade = 1500
+	}
+	assembly_score = {
+		modifier = {
+			add = 1
+			from = { is_planet_class = pc_nuked }
+		}
+		modifier = {
+			add = 0.05
+			from = {
+				is_planet_class = pc_nuked
+				has_deposit = d_lithoid_crater
+			}
+		}
+	}
+}
+
+trait_rapid_breeders = {
+	cost = 2
+    category = normal
+	species_possible_add = {
+		can_add_genetic_traits = yes
+	}
+	species_possible_remove = {
+		OR = {
+			can_remove_beneficial_genetic_traits = yes
+			can_remove_pop_growth_genetic_traits = yes
+		}
+	}
+	species_possible_merge_remove = {
+		always = yes
+	}
+	opposites = { "trait_pyroclastic" "trait_slow_breeders" "trait_fertile" "trait_rapid_breeders_lithoid" "trait_plantoid_budding" "trait_lithoid_budding" "trait_vat_grown" "trait_tiyanki" "trait_humanoid_existential_iteroparity" "trait_egg_laying" }
+	allowed_archetypes = { BIOLOGICAL LITHOID }
+	# SCA - Organic start only
+	species_class = { SCA_ORGANIC }
+	species_class_override = {
+		hidden_trigger = {
+			OR = {
+				SCA_is_lithoid = no
+				can_do_advanced_gene_modding = yes
+			}
+		}
+	}
+	tags = { organic positive pop_growth }
+	modifier = {
+		logistic_growth_mult = 0.1
+	}
+	slave_cost = {
+		trade = 1000
+	}
+}
+
+trait_slow_breeders = {
+	cost = -2
+    category = normal
+	species_potential_add = {
+		can_add_negative_organic_traits = yes
+	}
+	opposites = { "trait_pyroclastic" "trait_rapid_breeders" "trait_fertile" "trait_rapid_breeders_lithoid" "trait_plantoid_budding" "trait_lithoid_budding" "trait_vat_grown" "trait_tiyanki" "trait_humanoid_psychological_infertility" "trait_humanoid_existential_iteroparity" "trait_egg_laying" "trait_nascent_stage" }
+	allowed_archetypes = { BIOLOGICAL LITHOID }
+	# SCA - Organic start only
+	species_class = { SCA_ORGANIC }
+	species_class_override = {
+		hidden_trigger = {
+			OR = {
+				SCA_is_lithoid = no
+				can_do_advanced_gene_modding = yes
+			}
+		}
+	}
+	tags = { organic negative pop_growth }
+	modifier = {
+		logistic_growth_mult = -0.1
+	}
+	slave_cost = {
+		trade = -1000
+	}
+	ai_weight = {
+		factor = 0
+	}
+}
+

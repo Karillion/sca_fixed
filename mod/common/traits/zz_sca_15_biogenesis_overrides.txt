@@ -1,0 +1,858 @@
+########################################################################
+# SCA — keyed override for 15_biogenesis_species_traits.txt (load-last).
+# Only traits with genuine SCA edits are here; all others come from the
+# live 4.4.x base game. Each block = current vanilla + SCA deltas; dropped
+# 4.4.x logic (add-conditions, tags, modifiers, slave_cost=trade) recovered.
+########################################################################
+
+trait_acidic_vascularity = {
+	host_has_dlc = "BioGenesis"
+	cost = 1
+	species_possible_add = {
+		OR = {
+			can_add_genetic_traits = yes
+			can_add_or_remove_phenotype_traits = yes
+		}
+	}
+	species_possible_remove = {
+		OR = {
+			can_remove_beneficial_genetic_traits = yes
+			can_add_or_remove_phenotype_traits = yes
+		}
+	}
+	species_possible_merge_remove = {
+		always = yes
+	}
+	allowed_archetypes = { BIOLOGICAL LITHOID }
+	#species_class = { NECROID TOX }
+	localized_tags = {
+		SPECIES_TRAIT_NECROID
+		SPECIES_TRAIT_TOXOID
+	}
+	species_class_override = {
+		hidden_trigger = {
+			can_add_or_remove_phenotype_traits = yes
+		}
+	}
+	tags = { organic positive army necroid toxoid species }
+	custom_tooltip = trait_acidic_vascularity_effect
+	modifier = {
+		pop_cat_purge_bonus_workforce_mult = -0.75
+	}
+	slave_cost = {
+		trade = 500
+	}
+}
+
+trait_brittle = {
+	host_has_dlc = "BioGenesis"
+	initial = no
+	randomized = yes
+	cost = -3
+	species_potential_add = {
+		# Random/genemodded version
+		NOT = { has_trait = trait_brittle }
+		can_add_genetic_traits = yes
+	}
+	allowed_archetypes = { BIOLOGICAL LITHOID }
+	#SCA - also allow bugs
+	species_class = { LITHOID NECROID ART }
+	localized_tags = {
+		SPECIES_TRAIT_ARTHROPOID
+		SPECIES_TRAIT_LITHOID
+		SPECIES_TRAIT_NECROID
+	}
+	species_class_override = {
+		hidden_trigger = {
+			can_add_genetic_traits = yes
+		}
+	}
+	tags = { organic negative amenities lithoid necroid species }
+	modifier = {
+		pop_amenities_usage_add = 0.5
+	}
+	slave_cost = {
+		trade = -1000
+	}
+	assembly_score = {
+		modifier = {
+			add = -2
+			from = { free_amenities <= 10 }
+		}
+	}
+}
+
+trait_camouflage = {
+	host_has_dlc = "BioGenesis"
+	cost = 1
+	species_possible_add = {
+		OR = {
+			can_add_genetic_traits = yes
+			can_add_or_remove_phenotype_traits = yes
+		}
+	}
+	species_possible_remove = {
+		OR = {
+			can_remove_beneficial_genetic_traits = yes
+			can_add_or_remove_phenotype_traits = yes
+		}
+	}
+	species_possible_merge_remove = {
+		always = yes
+	}
+	opposites = { "trait_nerve_stapled" "trait_natural_physicists" "trait_chromalogs" }
+	allowed_archetypes = { BIOLOGICAL LITHOID }
+	#species_class = { AQUATIC ART REP }
+	localized_tags = {
+		SPECIES_TRAIT_ARTHROPOID
+		SPECIES_TRAIT_REPTILIAN
+		SPECIES_TRAIT_AQUATIC
+	}
+	species_class_override = {
+		hidden_trigger = {
+			can_add_or_remove_phenotype_traits = yes
+		}
+	}
+	portrait_override = { tox12 mindwarden_01 }
+	tags = { organic positive army research pop_output aquatic arthropoid reptilian species }
+	modifier = {
+		physicist_jobs_bonus_workforce_mult = 0.10
+		army_health = 0.2
+	}
+
+	assembly_score = {
+		modifier = {
+			add = 1
+			from = { has_research_designation = yes }
+		}
+		modifier = {
+			add = 1
+			from = { has_building = building_order_keep }
+		}
+	}
+
+	slave_cost = {
+		trade = 500
+	}
+}
+
+trait_chromalogs = {
+	host_has_dlc = "BioGenesis"
+	cost = 4
+	species_possible_add = {
+		OR = {
+			can_add_genetic_traits = yes
+			can_add_or_remove_phenotype_traits = yes
+		}
+	}
+	species_possible_remove = {
+		OR = {
+			can_remove_beneficial_genetic_traits = yes
+			can_add_or_remove_phenotype_traits = yes
+		}
+	}
+	species_possible_merge_remove = {
+		always = yes
+	}
+	opposites = { "trait_nerve_stapled" "trait_natural_physicists" "trait_camouflage" }
+	allowed_archetypes = { BIOLOGICAL LITHOID }
+	#species_class = { AQUATIC ART REP }
+	localized_tags = {
+		SPECIES_TRAIT_ARTHROPOID
+		SPECIES_TRAIT_REPTILIAN
+		SPECIES_TRAIT_AQUATIC
+	}
+	species_class_override = {
+		hidden_trigger = {
+			can_add_or_remove_phenotype_traits = yes
+		}
+	}
+	portrait_override = { avi18 tox12 mindwarden_01 }
+	tags = { organic positive army research pop_output unity aquatic arthropoid reptilian species }
+	modifier = {
+		physicist_jobs_bonus_workforce_mult = 0.20
+		bureaucrat_jobs_bonus_workforce_mult = 0.20
+		army_health = 0.4
+		pop_government_ethic_attraction = 0.15
+	}
+
+	assembly_score = {
+		modifier = {
+			add = 1.5
+			from = { has_research_designation = yes }
+		}
+		modifier = {
+			add = 1.5
+			from = { has_unity_designation = yes }
+		}
+		modifier = {
+			add = 3
+			from = { has_building = building_order_keep }
+		}
+	}
+
+	slave_cost = {
+		trade = 1500
+	}
+}
+
+trait_egg_laying = {
+	host_has_dlc = "BioGenesis"
+	cost = 2
+	species_possible_add = {
+		OR = {
+			can_add_genetic_traits = yes
+			can_add_or_remove_phenotype_traits = yes
+		}
+	}
+	species_possible_remove = {
+		OR = {
+			can_remove_beneficial_genetic_traits = yes
+			can_add_or_remove_phenotype_traits = yes
+			can_remove_pop_growth_genetic_traits = yes
+		}
+	}
+	species_possible_merge_remove = {
+		always = yes
+	}
+	opposites = { "trait_pyroclastic" "trait_slow_breeders" "trait_fertile" "trait_rapid_breeders_lithoid" "trait_plantoid_budding" "trait_lithoid_budding" "trait_vat_grown" "trait_tiyanki" "trait_humanoid_existential_iteroparity" }
+	allowed_archetypes = { BIOLOGICAL LITHOID }
+	species_class = { SCA_ORGANIC }
+	localized_tags = {
+		SPECIES_TRAIT_AVIAN
+		SPECIES_TRAIT_REPTILIAN
+		SPECIES_TRAIT_AQUATIC
+	}
+	species_class_override = {
+		hidden_trigger = {
+			OR = {
+				can_add_or_remove_phenotype_traits = yes
+				SCA_is_lithoid = no
+			}
+		}
+	}
+	#portrait_override = { mam16 mindwarden_01 }
+	tags = { organic positive pop_growth avian reptilian aquatic species }
+	custom_tooltip = trait_egg_laying_effect
+	triggered_planet_growth_habitability_modifier = {
+		potential = {
+			exists = planet
+			OR = {
+				AND = {
+					planet = {
+						NOT = { has_deficit = minerals }
+					}
+					from = { has_trait = trait_lithoid }
+				}
+				AND = {
+					planet = {
+						NOT = { has_deficit = food }
+					}
+					from = { has_trait = trait_organic }
+				}
+				AND = {
+					planet = {
+						NOT = { has_deficit = alloys }
+					}
+					from = { has_trait = trait_infernal }
+				}
+			}
+		}
+		logistic_growth_mult = 0.15
+	}
+
+	assembly_score = {
+		modifier = {
+			add = 2
+			OR = {
+				AND = {
+					from = {
+						NOT = { has_deficit = minerals }
+					}
+					has_trait = trait_lithoid
+				}
+				AND = {
+					from = {
+						NOT = { has_deficit = food }
+					}
+				}
+				AND = {
+					from = {
+						NOT = { has_deficit = alloys }
+					}
+					has_trait = trait_infernal
+				}
+			}
+		}
+	}
+
+	slave_cost = {
+		trade = 500
+	}
+}
+
+trait_familial = {
+	host_has_dlc = "BioGenesis"
+	cost = 2
+	species_possible_add = {
+		OR = {
+			can_add_genetic_traits = yes
+			can_add_or_remove_phenotype_traits = yes
+		}
+		owner_is_hive_empire = no
+	}
+	species_possible_remove = {
+		OR = {
+			can_remove_beneficial_genetic_traits = yes
+			can_add_or_remove_phenotype_traits = yes
+		}
+	}
+	species_possible_merge_remove = {
+		always = yes
+	}
+	portrait_override = { fun16 fun4 lith_human pla17 aqu5 }
+	allowed_archetypes = { BIOLOGICAL LITHOID }
+	#species_class = { HUM MAM AVI }
+	localized_tags = {
+		SPECIES_TRAIT_AVIAN
+		SPECIES_TRAIT_HUMANOID
+		SPECIES_TRAIT_MAMMALIAN
+	}
+	species_class_override = {
+		hidden_trigger = {
+			can_add_or_remove_phenotype_traits = yes
+		}
+	}
+	tags = { organic positive happiness humanoid mammalian avian individual species }
+	forbidden_ethics = { ethic_gestalt_consciousness }
+	custom_tooltip = trait_familial_effect
+	triggered_pop_group_modifier = {
+		pop_happiness = 0.00001
+		mult = planet.value:counter_familial
+	}
+	slave_cost = {
+		trade = 1000
+	}
+
+	assembly_score = {
+		base = 1
+	}
+}
+
+trait_flight = {
+	host_has_dlc = "BioGenesis"
+	initial = no
+	randomized = yes
+	cost = 2
+	random_weight = {
+		MAM = 5
+		REP = 5
+		FUN = 5
+		NECROID = 5
+		TOX = 5
+		MOL = 2
+	}
+	opposites = { "trait_spatial_mastery" "trait_rooted" }
+	species_potential_add = {
+		# Random/genemodded version
+		NOT = { has_trait = trait_flight }
+		SCA_can_add_special_genetic_traits = yes
+	}
+	species_possible_remove = {
+		OR = {
+			can_remove_beneficial_genetic_traits = yes
+			can_add_or_remove_phenotype_traits = yes
+		}
+	}
+	species_possible_merge_remove = {
+		always = yes
+	}
+	allowed_archetypes = { BIOLOGICAL LITHOID }
+	species_class = { AVI ART }
+	localized_tags = {
+		SPECIES_TRAIT_AVIAN
+		SPECIES_TRAIT_ARTHROPOID
+	}
+	species_class_override = {
+		hidden_trigger = {
+			SCA_can_add_special_genetic_traits = yes
+		}
+	}
+	#SCA - add all floating species
+	portrait_override = { mam1 rep17 bio10 mammalian_ar_07 mol7 fun3 pla3 lith2 lith4 lith11 nec5 aqu10 aqu12 tox5 tox8 psionic_01 psionic_12 }
+	tags = { organic positive army leader avian arthropoid species }
+	modifier = {
+		commander_skill_add = 1
+		army_damage_taken_mult = -0.30
+	}
+	slave_cost = {
+		trade = 500
+	}
+}
+
+trait_genetic_memory = {
+	host_has_dlc = "BioGenesis"
+	cost = 3
+	species_possible_add = {
+		OR = {
+			can_add_genetic_traits = yes
+			can_add_or_remove_phenotype_traits = yes
+		}
+	}
+	species_possible_remove = {
+		OR = {
+			can_remove_beneficial_genetic_traits = yes
+			can_add_or_remove_phenotype_traits = yes
+		}
+	}
+	species_possible_merge_remove = {
+		always = yes
+	}
+	#portrait_override = { fun16 fun4 lith_human pla17 aqu5 }
+	opposites = { "trait_nonadaptive" }
+	allowed_archetypes = { BIOLOGICAL LITHOID }
+	#species_class = { HUM MAM NECROID }
+	localized_tags = {
+		SPECIES_TRAIT_HUMANOID
+		SPECIES_TRAIT_MAMMALIAN
+		SPECIES_TRAIT_NECROID
+	}
+	species_class_override = {
+		hidden_trigger = {
+			can_add_or_remove_phenotype_traits = yes
+		}
+	}
+	tags = { organic positive habitability humanoid mammalian necroid species }
+	custom_tooltip = trait_genetic_memory_effect
+	triggered_planet_growth_habitability_modifier = {
+		potential = {
+			exists = planet
+			planet = {
+				is_colony = yes
+			}
+		}
+		pop_environment_tolerance = 0.005
+		mult = value:genetic_memory_mult
+	}
+	slave_cost = {
+		trade = 1000
+	}
+}
+
+trait_hollow_bones = { #Add non-randomized version
+	host_has_dlc = "BioGenesis"
+	initial = no
+	randomized = yes
+	cost = -3
+	species_potential_add = {
+		# Random/genemodded version
+		NOT = { has_trait = trait_hollow_bones }
+		SCA_can_add_special_genetic_traits = yes
+	}
+	opposites = { "trait_strong" "trait_very_strong" "trait_weak" "trait_tankbound" "trait_photoadaptive" }
+	allowed_archetypes = { BIOLOGICAL LITHOID }
+	#SCA: Add more possible portraits
+	portrait_override = { fun16 fun4 aqu13 }
+	species_class = { TOX AVI NECROID }
+	localized_tags = {
+		SPECIES_TRAIT_AVIAN
+		SPECIES_TRAIT_TOXOID
+		SPECIES_TRAIT_NECROID
+	}
+	species_class_override = {
+		hidden_trigger = {
+			SCA_can_add_special_genetic_traits = yes
+		}
+	}
+	tags = { organic negative pop_output avian toxoid species }
+	custom_tooltip = trait_hollow_bones_effect
+	triggered_pop_group_modifier = {
+		potential = {
+			exists = planet
+		}
+		worker_and_simple_drone_cat_bonus_workforce_mult = -0.01	# -0.1%
+		soldier_jobs_bonus_workforce_mult = -0.01
+		mult = value:hollow_bones_mult								# Multiplied by 2/3 × planet size
+	}
+
+	slave_cost = {
+		trade = -400
+	}
+
+	assembly_score = {
+		modifier = {
+			from = { planet_size >= 15 }
+			add = -2
+		}
+	}
+}
+
+trait_nascent_stage = {
+	host_has_dlc = "BioGenesis"
+	cost = -2
+	species_potential_add = {
+		OR = {
+			can_add_negative_organic_traits = yes
+			can_add_or_remove_phenotype_traits = yes
+		}
+	}
+	#portrait_override = { fun16 fun4 lith_human pla17 aqu5 mindwarden_01 }
+	opposites = { "trait_slow_breeders" "trait_humanoid_psychological_infertility" "trait_unplugged_cybernetic_positives_3" "trait_unplugged_cybernetic_positives_2" "trait_unplugged_cybernetic_positives_1" "trait_pathogenic_genes" "trait_wilderness" }
+	allowed_archetypes = { BIOLOGICAL LITHOID }
+	#species_class = { HUM MAM REP ART }
+	localized_tags = {
+		SPECIES_TRAIT_ARTHROPOID
+		SPECIES_TRAIT_HUMANOID
+		SPECIES_TRAIT_MAMMALIAN
+		SPECIES_TRAIT_REPTILIAN
+	}
+	species_class_override = {
+		hidden_trigger = {
+			can_add_or_remove_phenotype_traits = yes
+		}
+	}
+	tags = { organic negative pop_growth humanoid mammalian reptilian arthropoid species }
+	custom_tooltip = trait_nascent_stage_effect
+	slave_cost = {
+		trade = -1000
+	}
+}
+
+trait_permeable_skin = {
+	host_has_dlc = "BioGenesis"
+	cost = -1
+	species_potential_add = {
+		OR = {
+			can_add_genetic_traits = yes
+			can_add_or_remove_phenotype_traits = yes
+		}
+	}
+	opposites = { "trait_adaptive" "trait_extremely_adaptive" }
+	allowed_planet_classes = {
+		pc_tropical
+		pc_arid
+		pc_continental
+		pc_ocean
+		pc_tundra
+		pc_arctic
+		pc_alpine
+		pc_savannah
+		pc_desert
+	}
+	allowed_archetypes = { BIOLOGICAL LITHOID }
+	#species_class = { MOL AQUATIC }
+	localized_tags = {
+		SPECIES_TRAIT_MOLLUSCOID
+		SPECIES_TRAIT_AQUATIC
+	}
+	species_class_override = {
+		hidden_trigger = {
+			can_add_or_remove_phenotype_traits = yes
+		}
+	}
+	tags = { organic negative habitability molluscoid aquatic species }
+	custom_tooltip = trait_permeable_skin_effect
+	triggered_planet_growth_habitability_modifier = {
+		potential = {
+			exists = from
+			from = {
+				OR = {
+					AND = {
+						ideal_planet_is_wet = yes
+						root = {
+							OR = {
+								is_dry = yes
+								is_cold = yes
+							}
+						}
+					}
+					AND = {
+						ideal_planet_is_dry = yes
+						root = {
+							OR = {
+								is_wet = yes
+								is_cold = yes
+							}
+						}
+					}
+					AND = {
+						ideal_planet_is_cold = yes
+						root = {
+							OR = {
+								is_dry = yes
+								is_wet = yes
+							}
+						}
+					}
+				}
+			}
+		}
+		pop_environment_tolerance = -0.2
+	}
+	slave_cost = {
+		trade = -1000
+	}
+}
+
+trait_rooted = {
+	host_has_dlc = "BioGenesis"
+	initial = no
+	randomized = yes
+	cost = -3
+	species_potential_add = {
+		# Random/genemodded version
+		NOT = { has_trait = trait_rooted }
+		can_add_genetic_traits = yes
+	}
+	opposites = { "trait_sedentary" "trait_nomadic" }
+	allowed_archetypes = { BIOLOGICAL LITHOID }
+	species_class = { FUN PLANT }
+	localized_tags = {
+		SPECIES_TRAIT_FUNGOID
+		SPECIES_TRAIT_PLANTOID
+	}
+	species_class_override = {
+		hidden_trigger = {
+			can_add_genetic_traits = yes
+		}
+	}
+	#SCA - more rooted species
+	portrait_override = { aqu7 lith6 nec3 stargazer_01 bio6 lith12 tox3 }
+	tags = { organic negative migration fungoid plantoid species }
+	custom_tooltip = trait_rooted_effect
+	modifier = {
+		pop_resettlement_cost_mult = 2
+	}
+
+	slave_cost = {
+		trade = -400
+	}
+	assembly_score = {
+		modifier = {
+			from = { free_jobs = 0 }
+			add = -2
+		}
+	}
+	ai_weight = {
+		weight = 0
+	}
+}
+
+trait_seasonal_dormancy = {
+	host_has_dlc = "BioGenesis"
+	cost = 2
+	species_possible_add = {
+		OR = {
+			can_add_genetic_traits = yes
+			can_add_or_remove_phenotype_traits = yes
+		}
+	}
+	species_possible_remove = {
+		OR = {
+			can_remove_beneficial_genetic_traits = yes
+			can_add_or_remove_phenotype_traits = yes
+		}
+	}
+	species_possible_merge_remove = {
+		always = yes
+	}
+	#portrait_override = { fun16 fun4 mindwarden_01 }
+	opposites = { "trait_wasteful" "trait_conservational" "trait_low_maintenance" }
+	allowed_archetypes = { BIOLOGICAL LITHOID }
+	#species_class = { MAM REP }
+	localized_tags = {
+		SPECIES_TRAIT_MAMMALIAN
+		SPECIES_TRAIT_REPTILIAN
+	}
+	species_class_override = {
+		hidden_trigger = {
+			can_add_or_remove_phenotype_traits = yes
+		}
+	}
+	tags = { organic positive upkeep mammalian reptilian species }
+	custom_tooltip = trait_seasonal_dormancy_effect
+	modifier = {
+		planet_pops_upkeep_mult = -0.15
+	}
+	triggered_pop_group_modifier = {
+		potential = {
+			OR = {
+				is_unemployed = yes
+				is_pop_category = civilian
+				is_pop_category = maintenance_drone
+			}
+		}
+		planet_pops_upkeep_mult = -0.60
+	}
+
+	slave_cost = {
+		trade = 500
+	}
+
+	assembly_score = {
+		base = 1
+		modifier = {
+			from = { free_jobs = 0 }
+			add = 1.5
+		}
+	}
+}
+
+trait_shelled = {
+	host_has_dlc = "BioGenesis"
+	initial = no
+	randomized = yes
+	random_weight = {
+		REP = 5
+		MOL = 2
+	}
+	cost = 3
+	species_potential_add = {
+		# Random/genemodded version
+		NOT = { has_trait = trait_shelled }
+		can_add_genetic_traits = yes
+	}
+	species_possible_remove = {
+		OR = {
+			can_remove_beneficial_genetic_traits = yes
+			can_add_or_remove_phenotype_traits = yes
+		}
+	}
+	species_possible_merge_remove = {
+		always = yes
+	}
+	opposites = { "trait_nonadaptive" "trait_adaptive" "trait_extremely_adaptive" "trait_robust" "trait_adaptive_lithoid" "trait_communal" "trait_spatial_mastery" }
+	allowed_archetypes = { BIOLOGICAL LITHOID }
+	#SCA: Also allow bugs
+	species_class = { MOL NECROID ART }
+	localized_tags = {
+		SPECIES_TRAIT_ARTHROPOID
+		SPECIES_TRAIT_MOLLUSCOID
+		SPECIES_TRAIT_NECROID
+	}
+	species_class_override = {
+		hidden_trigger = {
+			can_add_genetic_traits = yes
+		}
+	}
+	portrait_override = { rep14 pro2 aqu3 aqu10 fun15 tox5 tox9 }
+	tags = { organic positive habitability housing necroid molluscoid arthropoid species }
+	modifier = {
+		pop_housing_usage_mult = -0.3
+		pop_environment_tolerance = 0.10
+	}
+	assembly_score = {
+		base = 1
+		modifier = {
+			from = { free_housing <= 1000 }
+			add = 1.5
+		}
+	}
+	slave_cost = {
+		trade = 1500
+	}
+}
+
+trait_spare_organs = {
+	host_has_dlc = "BioGenesis"
+	cost = 2
+	species_possible_add = {
+		OR = {
+			can_add_genetic_traits = yes
+			can_add_or_remove_phenotype_traits = yes
+		}
+	}
+	species_possible_remove = {
+		OR = {
+			can_remove_beneficial_genetic_traits = yes
+			can_add_or_remove_phenotype_traits = yes
+		}
+	}
+	species_possible_merge_remove = {
+		always = yes
+	}
+	allowed_archetypes = { BIOLOGICAL LITHOID }
+	#species_class = { MOL NECROID TOX }
+	localized_tags = {
+		SPECIES_TRAIT_MOLLUSCOID
+		SPECIES_TRAIT_NECROID
+		SPECIES_TRAIT_TOXOID
+	}
+	species_class_override = {
+		hidden_trigger = {
+			can_add_or_remove_phenotype_traits = yes
+		}
+	}
+	tags = { organic positive army leader molluscoid necroid toxoid species }
+	custom_tooltip = trait_spare_organs_effect
+	modifier = {
+		livestock_jobs_bonus_workforce_mult = 0.5
+	}
+
+	resources = {
+		category = planet_pops
+		produces = {
+			trigger = {
+				exists = owner
+				owner = {
+					NOT = {
+						has_origin = origin_evolutionary_predators
+					}
+					is_megacorp = yes
+					is_mutation_authority = yes
+				}
+			}
+			trade = 0.5
+		}
+	}
+
+	slave_cost = {
+		trade = 1000
+	}
+}
+
+trait_spatial_mastery = {
+	host_has_dlc = "BioGenesis"
+	initial = no
+	randomized = yes
+	cost = 4
+	opposites = { "trait_communal" "trait_shelled" "trait_flight" }
+	species_possible_add = {
+		OR = {
+			can_add_genetic_traits = yes
+			can_add_or_remove_phenotype_traits = yes
+		}
+	}
+	species_possible_remove = {
+		OR = {
+			can_remove_beneficial_genetic_traits = yes
+			can_add_or_remove_phenotype_traits = yes
+		}
+	}
+	species_possible_merge_remove = {
+		always = yes
+	}
+	allowed_archetypes = { BIOLOGICAL LITHOID }
+	species_class = { AVI ART }
+	localized_tags = {
+		SPECIES_TRAIT_AVIAN
+		SPECIES_TRAIT_ARTHROPOID
+	}
+	species_class_override = {
+		hidden_trigger = {
+			can_add_or_remove_phenotype_traits = yes
+		}
+	}
+	#SCA - add all floating species
+	portrait_override = { mam1 rep17 bio10 mammalian_ar_07 mol7 fun3 pla3 lith2 lith4 lith11 nec5 aqu10 aqu12 tox5 tox8 psionic_01 psionic_12 }
+	tags = { organic positive army housing leader avian arthropoid species }
+	modifier = {
+		leader_skill_add = 1
+		army_damage_taken_mult = -0.50
+		pop_housing_usage_mult = -0.10
+	}
+	slave_cost = {
+		trade = 1000
+	}
+}
+

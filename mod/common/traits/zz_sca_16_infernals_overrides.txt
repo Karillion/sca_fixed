@@ -1,0 +1,263 @@
+########################################################################
+# SCA — Infernals trait overrides (keyed, load-last)
+#
+# Replaces the old full-file copy of 16_infernals_traits.txt.
+# Only the traits with genuine SCA edits are defined here; every other
+# infernal trait now comes from the live 4.4.x base game.
+#
+# Each block = the CURRENT vanilla 4.4.x definition with ONLY the SCA deltas
+# reapplied (marked #SCA). 4.4.x logic the frozen copy was reverting is kept
+# at vanilla values on purpose — notably trait_infernal's full resources block
+# (cyborg-reduction upkeep + is_being_purged/is_sapient/voidling guards) and
+# slave_cost = trade.
+########################################################################
+
+trait_infernal = {
+	cost = 0
+	category = normal
+	#SCA: trophic exclusivity is handled via SCA_has_multiple_trophic_traits below, not hard opposites.
+	#opposites = { "trait_lithoid" "trait_aquatic" "trait_organic" "trait_agrarian" }
+	host_has_dlc = "Infernals Species Pack" # SCA: DLC lock
+	sorting_priority = 20
+	initial = yes #SCA: selectable at game start
+	randomized = no
+	species_potential_add = {
+		always = no
+	}
+	species_possible_remove = {
+		always = no
+	}
+	species_possible_merge_add = {
+		always = no
+	}
+	immortal_leaders = no
+	leader_age_min = 25
+	leader_age_max = 40
+	allowed_archetypes = { BIOLOGICAL PRESAPIENT LITHOID } #SCA: +LITHOID
+	tags = { organic species infernal leader habitability special }
+
+	#SCA: retarget to SCA class + limit trophic-trait stacking (was: species_class = { INF PRE_INF })
+	species_class = { SCA_INFERNAL }
+	species_class_override = {
+		hidden_trigger = {
+			SCA_has_multiple_trophic_traits = no
+		}
+	}
+	localized_tags = {
+		SPECIES_TRAIT_INFERNAL
+	}
+	ai_weight = {
+		weight = 0
+	}
+	icon = "gfx/interface/icons/traits/trait_infernal.dds"
+
+	resources = {
+		category = planet_pops
+		upkeep = {
+			trigger = {
+				is_phototrophic = no
+				NOT = { has_trait = trait_voidling }
+				is_being_purged = no
+				is_sapient = yes
+			}
+			alloys = @living_standard_alloys_normal
+		}
+		upkeep = {
+			trigger = {
+				is_phototrophic = yes
+				NOT = { has_trait = trait_voidling }
+				is_being_purged = no
+				is_sapient = yes
+			}
+			alloys = @living_standard_alloys_phototrophic
+		}
+		upkeep = {
+			trigger = {
+				OR = {
+					has_trait = trait_cybernetic
+					has_trait = trait_limited_cybernetic
+				}
+				is_being_purged = no
+				is_sapient = yes
+			}
+			alloys = @living_standard_alloys_cyborg_reduction
+		}
+	}
+
+	custom_tooltip = TRAIT_INFERNAL_EFFECT
+	modifier = {
+		leader_lifespan_add = 10
+		pc_volcanic_habitability = 0.2
+	}
+	triggered_planet_growth_habitability_modifier = {
+		potential = {
+			has_climate = cold
+		}
+		pop_environment_tolerance = -0.3
+	}
+	triggered_planet_growth_habitability_modifier = {
+		potential = {
+			is_planet_class = pc_volcanic
+		}
+		habitability_floor_add = 0.5
+	}
+}
+
+trait_pyroclastic = {
+	host_has_dlc = "Infernals Species Pack"
+	cost = 1
+	category = normal
+	species_possible_add = {
+		OR = {
+			can_add_genetic_traits = yes
+			can_add_or_remove_phenotype_traits = yes
+		}
+	}
+	species_possible_remove = {
+		OR = {
+			can_remove_beneficial_genetic_traits = yes
+			can_add_or_remove_phenotype_traits = yes
+		}
+	}
+	species_possible_merge_remove = {
+		always = yes
+	}
+	species_class_override = {
+		hidden_trigger = {
+			OR = {
+				can_add_or_remove_phenotype_traits = yes
+				can_add_transgenic_traits = yes
+				is_infernal = yes #SCA: actual infernals can always take it
+			}
+		}
+	}
+	opposites = { "trait_rapid_breeders" "trait_incubator" "trait_slow_breeders" "trait_fertile" "trait_rapid_breeders_lithoid" "trait_plantoid_budding" "trait_lithoid_budding" "trait_vat_grown" "trait_tiyanki" "trait_humanoid_existential_iteroparity" "trait_egg_laying" }
+	initial = yes
+	randomized = yes
+	allowed_archetypes = { BIOLOGICAL LITHOID } #SCA: +LITHOID
+	tags = { organic infernal positive pop_growth species }
+	species_class = { SCA_INFERNAL } #SCA: was { INF }
+	localized_tags = {
+		SPECIES_TRAIT_INFERNAL
+	}
+	ai_weight = {
+		weight = 0
+	}
+	icon = "gfx/interface/icons/traits/trait_pyroclastic.dds"
+	custom_tooltip = trait_pyroclastic_tooltip
+	slave_cost = {
+		trade = 500
+	}
+	triggered_planet_growth_habitability_modifier = {
+		potential = {
+			is_planet_class = pc_volcanic
+		}
+		# Adjust trait_pyroclastic_tooltip if this changes
+		logistic_growth_mult = 0.10
+	}
+}
+
+trait_crucible_community = {
+	host_has_dlc = "Infernals Species Pack"
+	cost = 1
+	category = normal
+	species_possible_add = {
+		OR = {
+			can_add_genetic_traits = yes
+			can_add_or_remove_phenotype_traits = yes
+		}
+	}
+	species_possible_remove = {
+		OR = {
+			can_remove_beneficial_genetic_traits = yes
+			can_add_or_remove_phenotype_traits = yes
+		}
+	}
+	species_possible_merge_remove = {
+		always = yes
+	}
+	country_modifier = {
+		country_edict_fund_add = 0.0025
+	}
+	initial = yes
+	randomized = yes
+	allowed_archetypes = { BIOLOGICAL LITHOID } #SCA: +LITHOID
+	species_class_override = {
+		hidden_trigger = {
+			OR = {
+				can_add_or_remove_phenotype_traits = yes
+				can_add_transgenic_traits = yes
+			}
+		}
+	}
+	tags = { organic infernal positive edict_fund }
+	#species_class = { INF } #SCA: unlocked from INF class
+	localized_tags = {
+		SPECIES_TRAIT_INFERNAL
+	}
+	ai_weight = {
+		weight = 0
+	}
+	icon = "gfx/interface/icons/traits/trait_crucible_community.dds"
+	custom_tooltip = trait_crucible_community_tooltip
+	slave_cost = {
+		trade = 500
+	}
+}
+
+trait_shell_slag = {
+	host_has_dlc = "Infernals Species Pack"
+	cost = 2
+	category = normal
+	species_possible_add = {
+		OR = {
+			can_add_genetic_traits = yes
+			can_add_or_remove_phenotype_traits = yes
+		}
+	}
+	species_possible_remove = {
+		OR = {
+			can_remove_beneficial_genetic_traits = yes
+			can_add_or_remove_phenotype_traits = yes
+		}
+	}
+	species_possible_merge_remove = {
+		always = yes
+	}
+	initial = yes
+	randomized = yes
+	opposites = { "trait_invasive" "trait_drake_scaled" }
+	allowed_archetypes = { BIOLOGICAL LITHOID } #SCA: +LITHOID
+	species_class_override = {
+		hidden_trigger = {
+			OR = {
+				can_add_or_remove_phenotype_traits = yes
+				can_add_transgenic_traits = yes
+				is_infernal = yes #SCA: actual infernals can always take it
+			}
+		}
+	}
+	tags = { organic positive infernal species rare_resource production}
+	species_class = { SCA_INFERNAL } #SCA: was { INF }
+	localized_tags = {
+		SPECIES_TRAIT_INFERNAL
+	}
+	ai_weight = {
+		weight = 0
+	}
+	icon = "gfx/interface/icons/traits/trait_shell_slag.dds"
+	custom_tooltip = trait_shell_slag_tooltip
+	slave_cost = {
+		trade = 500
+	}
+	resources = {
+		category = planet_pops
+		produces = {
+			trigger = {
+				is_slave_or_better = yes
+			}
+			sr_living_metal = @shell_slag_trait_resource_production
+		}
+	}
+
+}

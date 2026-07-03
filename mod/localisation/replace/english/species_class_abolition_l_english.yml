@@ -1,0 +1,42 @@
+﻿l_english:
+ 
+ SCA_ORGANIC: "Organic"
+ SCA_LITHOID: "Lithoid"
+ SCA_INFERNAL: "Infernal"
+ 
+ trait_sca_ergivore: "Ergivore"
+ trait_sca_ergivore_desc: "This species processes energy directly, rather than synthesizing it from biomass."
+ 
+ trait_egg_laying: "Nest Builders"
+ trait_egg_laying_desc: "This species has advanced nesting behaviors, taking particular care to ensure their eggs are safe. This allows for rapid growth during times of plenty."
+ trait_plantoid_phototrophic_portrait_override_tt: "Or any leafy species"
+ trait_hollow_bones_portrait_override_tt: "Or any hollow-boned species"
+ 
+ 
+ trait_fleeting_tooltip: "Organic Leader Lifespan: §R-10§! Years$TABBED_NEW_LINE$- Lithoid Leader Lifespan: §R-25§! Years"
+ 
+ trait_tankbound_npc: "$trait_tankbound$"
+ trait_tankbound_npc_desc: "$trait_tankbound_desc$"
+ trait_tankbound_npc_portrait_override_tt: "$trait_tankbound_portrait_override_tt$"
+ civic_tankbound_npc: "$civic_tankbound$"
+ civic_tankbound_npc_desc: "$civic_tankbound_desc$"
+ civic_tankbound_corporate_npc: "$civic_tankbound_corporate$"
+ civic_tankbound_corporate_npc_desc: "$civic_tankbound_desc$"
+ 
+ trait_sca_calamitous_birth: "Panspermic Origin"
+ trait_sca_calamitous_birth_desc: "This species originated from a meteor impact, ushering in a new era of complex life."
+ trait_sca_calamitous_birth_effects: "Ignores Habitability penalties from ['concept_lithoid_crater']"
+ 
+ origin_lithoid_desc: "Not native to their 'homeworld', this species arrived when a meteorite slammed into the planet and killed off most of the native life."
+ origin_tooltip_lithoid_effects: "- $HOMEWORLD$$TABBED_NEW_LINE$- ['concept_massive_crater']$TABBED_NEW_LINE$- ['concept_buried_lithoids']: +4$NEW_LINE$- Available Colony Ships: §Y$lithoid_colonizer_plural$§!$NEW_LINE$- Planets Colonized with §Y$lithoid_colonizer_plural$§!:$TABBED_NEW_LINE$- §Y$concept_buried_lithoids$§!: +2$TABBED_NEW_LINE$- $PLANETARY_MODIFIERS$ ['concept_lithoid_crater']$NEW_LINE$- $AVAILABLE_HOLDINGS$ ['concept_experimental_crater', £building£ $holding_experimental_crater$] on (Subject) colonies"
+
+ d_lithoid_crater_desc: "The impact site of the meteorite which brought new life to this planet."
+ d_buried_lithoids: "£blocker£ Buried Spawning Meteors"
+ d_buried_lithoids_desc: "These life-bearing meteors were driven deep into the ground when they fell from orbit."
+ concept_buried_lithoids_desc: "- Time to Clear: £time£ 360 §IDays§!\n- Cost to Clear: 1000 $i_minerals$\n- On Clearing: §G+100§! £pop£ §IPop§!\n\n§L$d_buried_lithoids_desc$§!"
+ lithoid_crater: "Spawning Crater"
+ lithoid_crater_desc: "This large crater is the result of a life-bearing meteorite slamming into the planet."
+ lithoid_colonizer: "Panspermia Meteorite"
+ lithoid_colonizer_plural: "Panspermia Meteorites"
+ 
+ civic_tooltip_hive_upkeep_twister_effects: "Change §Y1§! Base $r_unity$ Leader Upkeep to §Y2§! $r_food$, $r_minerals$, $r_energy$ or §Y1§! $r_alloys$"

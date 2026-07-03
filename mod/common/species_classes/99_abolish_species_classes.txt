@@ -1,0 +1,37 @@
+#These are for portrait archetype locks
+SCA_ORGANIC = {
+	archetype = BIOLOGICAL
+
+	playable = {
+		always = no
+	}
+	randomized = no
+	trait = "trait_organic"
+	gender = yes
+	graphical_culture = mammalian_01
+	move_pop_sound_effect = "moving_pop_confirmation"
+}
+
+SCA_LITHOID = {
+	archetype = LITHOID
+
+	playable = {
+		always = no
+	}
+	randomized = no
+	trait = "trait_lithoid"
+	graphical_culture = lithoid_01
+	move_pop_sound_effect = "reptilian_pops_move"
+}
+
+SCA_INFERNAL = {
+	archetype = BIOLOGICAL
+
+	playable = {
+		always = no
+	}
+	randomized = no
+	trait = "trait_infernal"
+	graphical_culture = infernal_01
+	move_pop_sound_effect = "molluscoid_pops_move"
+}

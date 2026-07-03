@@ -1,0 +1,78 @@
+# Additional Subspecies Initial Setup
+# Subspecies flags are set.
+# Rural Districts Added:
+#	+1 Agriculture Districts if subspecies is Biological
+
+if = {
+	limit = {
+		has_subspecies_civic_or_origin = yes
+	}
+	if = {
+		limit = {
+			owner = {
+				is_guided_sapience_empire = no
+				OR = {
+					last_created_species = { is_lithoid = yes }
+					last_created_species = { has_trait = trait_machine_unit }
+				}
+			}
+		}
+		owner = {
+			set_country_flag = lithoid_subspecies
+		}
+	}
+	else_if = {
+		limit = {
+			owner = {
+				is_guided_sapience_empire = no
+				last_created_species = { is_infernal = yes }
+			}
+		}
+		owner = {
+			set_country_flag = infernal_subspecies
+		}
+	}
+	else_if = {
+		limit = {
+			owner = {
+				is_guided_sapience_empire = no
+				OR = {
+					last_created_species = { has_trait = trait_SCA_ergivore }
+				}
+			}
+		}
+		owner = {
+			set_country_flag = SCA_ergivore_subspecies
+		}
+	}
+	else = {
+		owner = {
+			set_country_flag = non_lithoid_subspecies
+		}
+		change_variable = {
+			which = farming_districts
+			value = 1
+		}
+	}
+}
+
+# SCA: Ergivore economy stuff
+if = {
+	limit = {
+		owner = {
+			SCA_is_ergivore_empire = yes
+		}
+	}
+	change_variable = {
+		which = farming_districts
+		value = -3
+	}
+	change_variable = {
+		which = generator_districts
+		value = 2
+	}
+	change_variable = {
+		which = mining_districts
+		value = 1
+	}
+}
