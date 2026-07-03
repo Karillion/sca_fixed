@@ -1,18 +1,6 @@
-########################################################################
-# SCA — Shadows of the Shroud trait overrides (keyed, load-last)
-#
-# This file REPLACES the old full-file copy of 17_shroud_species_traits.txt.
-# Because it is named zz_* it loads after vanilla's 17_* file, so each trait
-# defined here overrides vanilla by key while every trait NOT listed here
-# (trait_blindness, trait_marked, and anything Paradox adds in future patches)
-# comes straight from the live base game.
-#
-# Each block below = the CURRENT vanilla 4.4.x definition with ONLY the
-# intended SCA deltas applied (marked with #SCA). Values that changed between
-# 4.3.7 and 4.4.x that the old full-file copy was silently reverting
-# (e.g. slave_cost trade vs energy, the trait_photoadaptive opposite) are left
-# at their vanilla values on purpose.
-########################################################################
+ ########################################
+ # Shadows of the Shroud Species Traits #
+ ########################################
 
 trait_tankbound = {
 	host_has_dlc = "Shadows of the Shroud"
@@ -224,5 +212,69 @@ trait_haunting_visions = {
 
 	slave_cost = {
 		trade = -1000
+	}
+}
+
+trait_blindness = {
+	host_has_dlc = "Shadows of the Shroud"
+
+	initial = no
+	randomized = no
+
+	species_possible_add = {
+		always = no
+	}
+	species_possible_remove = {
+		always = no
+	}
+	species_possible_merge_remove = {
+		always = no
+	}
+
+	triggered_species_modifier = {
+		pop_happiness = 0.1
+		pop_bonus_workforce_mult = -0.5
+	}
+
+	modifier = {
+		bureaucrat_jobs_bonus_workforce_mult = 0.25
+	}
+}
+
+trait_marked = {
+	host_has_dlc = "Shadows of the Shroud"
+
+	initial = no
+	randomized = no
+
+	species_possible_add = {
+		always = no
+	}
+	species_possible_remove = {
+		always = no
+	}
+	species_possible_merge_remove = {
+		always = no
+	}
+
+	modifier = {
+		army_health = -0.06
+		army_morale_damage_mult = 0.06
+	}
+
+	custom_tooltip_with_modifiers = "trait_marked_unity_bonus"
+
+	resources = {
+		category = planet_pops
+		produces = {
+			trigger = {
+				exists = owner
+				owner = {
+					has_origin = origin_endbringers
+				}
+				is_slave_or_better = yes
+			}
+			unity = 0.06
+		}
 	}
 }

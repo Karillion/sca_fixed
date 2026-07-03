@@ -1,0 +1,266 @@
+trait_presapient_starborn = {
+	cost = 3
+	opposites = { "trait_hive_mind" "trait_presapient_earthbound" "trait_syncretic_proles" "trait_sedentary" "trait_stargazer" "trait_nomadic" }
+	initial = yes
+	sapient = yes
+	species_possible_add = {
+		NOT = { has_trait = trait_presapient_starborn }
+		can_add_genetic_traits = yes
+	}
+	species_possible_remove = {
+		can_remove_beneficial_genetic_traits = yes
+	}
+	species_possible_merge_remove = {
+		always = yes
+	}
+	species_possible_merge_add = {
+		always = no
+	}
+	allowed_archetypes = { BIOLOGICAL LITHOID }
+	tags = { organic positive migration habitability presapient }
+	modifier = {
+		pop_resettlement_cost_mult = -0.5
+		pop_environment_tolerance = 0.1
+	}
+	slave_cost = {
+		energy = 1000
+	}
+}
+
+trait_presapient_earthbound = {
+	cost = 3
+	opposites = { "trait_presapient_starborn" "trait_syncretic_proles" "trait_nomadic" "trait_stargazer" "trait_ingenious" "trait_resilient" }
+	initial = yes
+	sapient = yes
+	species_possible_add = {
+		NOT = { has_trait = trait_presapient_earthbound }
+		can_add_genetic_traits = yes
+	}
+	species_possible_remove = {
+		can_remove_beneficial_genetic_traits = yes
+	}
+	species_possible_merge_remove = {
+		always = yes
+	}
+	species_possible_merge_add = {
+		always = no
+	}
+	allowed_archetypes = { BIOLOGICAL LITHOID }
+	tags = { organic positive pop_output energy army presapient }
+	modifier = {
+		technician_jobs_bonus_workforce_mult = 0.1
+		army_defense_damage_mult = 0.5
+	}
+	slave_cost = {
+		energy = 1000
+	}
+}
+
+trait_presapient_natural_intellectuals = {
+	cost = 2
+	opposites = { "trait_presapient_proles" "trait_syncretic_proles" "trait_intelligent" "trait_cranial_hypertrophy" "trait_cranial_megatrophy" "trait_very_strong" }
+	initial = yes
+	sapient = yes
+	species_possible_add = {
+		NOT = { has_trait = trait_presapient_natural_intellectuals }
+		can_add_genetic_traits = yes
+	}
+	species_possible_remove = {
+		can_remove_beneficial_genetic_traits = yes
+	}
+	species_possible_merge_remove = {
+		always = yes
+	}
+	species_possible_merge_add = {
+		always = no
+	}
+	allowed_archetypes = { BIOLOGICAL LITHOID }
+	tags = { organic positive pop_output research unity mineral presapient }
+	modifier = {
+		bureaucrat_jobs_bonus_workforce_mult = 0.05
+		researcher_jobs_bonus_workforce_mult = 0.1
+		worker_and_simple_drone_cat_bonus_workforce_mult = -0.1
+	}
+	slave_cost = {
+		energy = 1000
+	}
+}
+
+trait_presapient_proles = {
+	cost = 2
+	opposites = { "trait_presapient_natural_intellectuals" "trait_syncretic_proles" "trait_cranial_hypertrophy" "trait_cranial_megatrophy" "trait_intelligent" "trait_industrious" }
+	initial = yes
+	sapient = yes
+	species_possible_add = {
+		NOT = { has_trait = trait_presapient_proles }
+		can_add_genetic_traits = yes
+	}
+	species_possible_remove = {
+		can_remove_beneficial_genetic_traits = yes
+	}
+	species_possible_merge_remove = {
+		always = yes
+	}
+	species_possible_merge_add = {
+		always = no
+	}
+	allowed_archetypes = { BIOLOGICAL LITHOID }
+	tags = { organic positive pop_output mineral food research presapient }
+	modifier = {
+		army_damage_mult = 0.10
+		worker_and_simple_drone_cat_bonus_workforce_mult = 0.10
+		researcher_jobs_bonus_workforce_mult = -0.15
+	}
+	slave_cost = {
+		energy = 500
+	}
+}
+
+trait_presapient_conservative = {
+	cost = 1
+	opposites = { "trait_hive_mind" "trait_presapient_proles" "trait_syncretic_proles" "trait_conformists" "trait_quarrelsome" "trait_deviants" }
+	initial = yes
+	randomized = no #Too harsh a negative
+	sapient = yes
+	species_possible_add = {
+		NOT = { has_trait = trait_presapient_conservative }
+		can_add_negative_organic_traits = yes
+	}
+	species_possible_merge_remove = {
+		always = yes
+	}
+	species_possible_merge_add = {
+		always = no
+	}
+	allowed_archetypes = { BIOLOGICAL LITHOID }
+	tags = { organic positive happiness ethic_attraction leader presapient }
+	modifier = {
+		pop_happiness = 0.05
+		pop_government_ethic_attraction = 0.25
+		species_leader_exp_gain = -0.50
+	}
+	ai_weight = {
+		weight = 0
+	}
+	slave_cost = {
+		energy = 500
+	}
+}
+
+trait_presapient_irradiated = {
+	cost = 0
+	initial = no
+	sapient = no
+	species_possible_remove = {
+		can_remove_presapient_genetic_traits = yes
+	}
+	species_possible_merge_remove = {
+		always = yes
+	}
+	species_possible_merge_add = {
+		always = no
+	}
+	allowed_archetypes = { BIOLOGICAL PRESAPIENT LITHOID }
+	tags = { organic positive leader habitability presapient }
+	modifier = {
+		pc_nuked_habitability = 1
+		leader_lifespan_add = 30
+	}
+}
+
+trait_presapient_docile_livestock = {
+	cost = 0
+	opposites = { "trait_intelligent" "trait_erudite" "trait_natural_engineers" "trait_natural_physicists" "trait_natural_sociologists" }
+	initial = no
+	sapient = no
+	species_possible_remove = {
+		can_remove_presapient_genetic_traits = yes
+	}
+	species_possible_merge_remove = {
+		always = yes
+	}
+	species_possible_merge_add = {
+		always = no
+	}
+	randomized = no
+	icon = "gfx/interface/icons/traits/trait_primitive.dds"
+	allowed_archetypes = { BIOLOGICAL PRESAPIENT LITHOID }
+	tags = { organic positive pop_growth pop_output unity energy research presapient }
+	modifier = {
+		logistic_growth_mult = 0.3
+		bureaucrat_jobs_bonus_workforce_mult = 0.1
+		technician_jobs_bonus_workforce_mult = -0.5
+		researcher_jobs_bonus_workforce_mult = -0.75
+	}
+}
+
+trait_presapient_forcefully_devolved = {
+	cost = 0
+	initial = no
+	sapient = no
+	species_possible_remove = {
+		can_remove_presapient_genetic_traits = yes
+	}
+	species_possible_merge_remove = {
+		always = yes
+	}
+	species_possible_merge_add = {
+		always = no
+	}
+	icon = "gfx/interface/icons/traits/trait_primitive.dds"
+	allowed_archetypes = { BIOLOGICAL PRESAPIENT LITHOID }
+	tags = { organic negative army pop_output pop_growth leader presapient special }
+	modifier = {
+		army_damage_mult = -0.10
+		pop_bonus_workforce_mult = -0.1
+		logistic_growth_mult = -0.1
+		species_leader_exp_gain = -0.20
+	}
+}
+
+trait_presapient_unintelligent = {
+	cost = 0
+	opposites = { "trait_intelligent" "trait_erudite" "trait_natural_engineers" "trait_natural_physicists" "trait_natural_sociologists" }
+	initial = no
+	sapient = no
+	species_possible_remove = {
+		can_remove_presapient_genetic_traits = no
+	}
+	species_possible_merge_remove = {
+		always = yes
+	}
+	species_possible_merge_add = {
+		always = no
+	}
+	randomized = no
+	forced_happiness = yes
+	icon = "gfx/interface/icons/traits/trait_primitive.dds"
+	allowed_archetypes = { BIOLOGICAL PRESAPIENT LITHOID }
+	tags = { organic negative pop_growth research presapient }
+	modifier = {
+		logistic_growth_mult = 0.2
+		technician_jobs_bonus_workforce_mult = -1
+		researcher_jobs_bonus_workforce_mult = -1
+	}
+}
+
+trait_presapient_stage = {
+	cost = 0
+	initial = no
+	sapient = no
+	species_possible_merge_remove = {
+		always = no
+	}
+	species_possible_merge_add = {
+		always = no
+	}
+	randomized = no
+	forced_happiness = yes
+	icon = "gfx/interface/icons/traits/trait_primitive.dds"
+	allowed_archetypes = { BIOLOGICAL PRESAPIENT LITHOID }
+	tags = { organic negative presapient special }
+	forced_integration = {
+		integration_rate = 0.0167  # ~1/60th per month
+		minimum_colony_age = 60  # months
+	}
+}

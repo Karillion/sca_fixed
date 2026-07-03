@@ -1,0 +1,144 @@
+### Custom traits
+
+trait_sca_ergivore = {
+	sorting_priority = 20
+	opposites = { "trait_plantoid_phototrophic" "trait_plantoid_radiotrophic" }
+	initial = yes
+	randomized = no
+	
+	species_potential_add = {
+		always = no
+	}
+	species_possible_remove = {
+		always = no
+	}
+	species_possible_merge_add = {
+		always = no
+	}
+
+	allowed_archetypes = { BIOLOGICAL PRESAPIENT LITHOID MACHINE }
+	opposites = { "trait_plantoid_budding" "trait_rooted" "trait_presapient_earthbound" }
+	tags = { organic positive special }
+	ai_weight = {
+		weight = 0
+	}
+	# Limit characteristic stacking
+	species_class = { SCA_ORGANIC }
+	species_class_override = {
+		hidden_trigger = {
+			SCA_has_multiple_trophic_traits = no
+		}
+	}
+
+	custom_tooltip_with_modifiers = TRAIT_VOIDLING_EFFECT
+	resources = {
+		category = planet_pops
+		# Energy Upkeep
+		upkeep = {
+			trigger = {
+				NOT = { has_trait = trait_voidling }
+				is_being_purged = no
+				is_sapient = yes
+			}
+			energy = @living_standard_energy_normal
+		}
+	}
+}
+
+trait_sca_calamitous_birth = {
+	sorting_priority = 20
+	initial = no
+	randomized = no
+	
+	species_potential_add = {
+		always = no
+	}
+	species_possible_remove = {
+		always = no
+	}
+	species_possible_merge_add = {
+		always = no
+	}
+
+	allowed_archetypes = { BIOLOGICAL PRESAPIENT LITHOID MACHINE }
+	opposites = { "trait_plantoid_budding" "trait_rooted" "trait_presapient_earthbound" }
+	tags = { organic positive special }
+	ai_weight = {
+		weight = 0
+	}
+
+	custom_tooltip_with_modifiers = trait_sca_calamitous_birth_effects
+	
+	triggered_planet_growth_habitability_modifier = {
+		potential = {
+			exists = planet
+			planet = {
+				OR = {
+					has_modifier = lithoid_crater
+					has_deposit = d_lithoid_crater
+				}
+			}
+			#Redundant with lithoid
+			NOT = { has_trait = trait_lithoid }
+		}
+		pop_environment_tolerance = 0.5
+	}
+}
+
+trait_tankbound_npc = {
+	host_has_dlc = "Shadows of the Shroud"
+
+	initial = no
+	randomized = no
+
+	species_possible_add = {
+		always = no
+	}
+	species_possible_remove = {
+		always = no
+	}
+	species_possible_merge_remove = {
+		always = no
+	}
+	opposites = { "trait_weak" "trait_hollow_bones" }
+
+	custom_tooltip_with_modifiers = trait_tankbound_effects
+
+	#SCA: More tankbound NPCs
+	portrait_override = { nec9 tox13 psionic_07 inf4 avi15 nec2 nec4 nec8 tox1 aqu13 psionic_01 }
+
+	triggered_pop_group_modifier = {
+		planet_pops_alloys_upkeep_mult = -0.5
+		planet_pops_minerals_upkeep_mult = -0.5
+		planet_pops_food_upkeep_mult = -0.5
+		planet_pops_energy_upkeep_mult = -0.5
+	}
+	modifier = {
+		pop_amenities_usage_mult = 0.5
+		logistic_growth_mult = -0.25
+	}
+}
+
+### Presapient traits for some extra customization
+
+
+
+
+
+
+
+### Plantoid traits
+
+
+
+### Biogenesis traits
+
+
+
+
+
+
+
+### Shroud traits
+
+
